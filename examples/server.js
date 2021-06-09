@@ -53,7 +53,11 @@ router.get('/error/timeout', function(req, res) {
     })
   }, 3000)
 })
-
+router.get('/extend/get', function(req, res) {
+  res.json({
+    msg: `extend hello world`
+  })
+})
 app.use(router)
 app.use(webpackDevMiddleware(compiler,{
     publicPath:'/__build__/',
