@@ -58,6 +58,9 @@ router.get('/extend/get', function(req, res) {
     msg: `extend hello world`
   })
 })
+router.post('/extend/post', function(req, res) {
+  res.json(req.body)
+})
 app.use(router)
 app.use(webpackDevMiddleware(compiler,{
     publicPath:'/__build__/',
