@@ -7,7 +7,6 @@ function createInstance(): AxiosInstance {
     const instance = Axios.prototype.request.bind(context)
 
     extend(instance, context)
-    // console.log(instance)
     return instance as AxiosInstance
 }
 

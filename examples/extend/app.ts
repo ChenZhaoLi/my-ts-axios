@@ -11,18 +11,34 @@ interface User {
     age: number
 }
 
-function getUser<T>() {
-    return axios<ResponseData<T>>('/extend/user')
-        .then(res => res.data)
-        .catch(err => console.error(err))
-}
-async function test() {
-    const user = await getUser<User>()
-    if (user) {
-        console.log(user.result.name)
-    }
-}
-test()
+
+// interface Counter {
+//     (start: number): string;
+//     interval: number;
+//     reset(): void;
+// }
+
+// function getCounter(): Counter {
+//     let counter = <Counter>function (start: number) {return 12 };
+//     counter.interval = 123;
+//     counter.reset = function () { };
+//     return counter;
+// }
+
+// let c = getCounter();
+// c(10);
+// c.reset();
+// c.interval = 5.0;
+
+// interface SearchFunc {
+//     (a: string, b: string): boolean
+//     (a: string): boolean
+// }
+// let cc = function (c: string): boolean {
+//     return false
+// }
+// cc as SearchFunc
+// cc('1', '2')
 
 // axios({
 //     url: '/extend/post',
