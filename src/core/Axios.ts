@@ -1,6 +1,7 @@
 import dispatchRequest from './dispatchRequest';
 import InterceptorManager from './interceptorManager';
 import { AxiosRequestConfig, AxiosPromise, Method, AxiosResponse, ResolvedFn, RejectedFn } from '../types/index';
+import mergeConfig from './mergeConfig';
 
 interface Interceptors {
     request: InterceptorManager<AxiosRequestConfig>
@@ -30,6 +31,8 @@ export default class Axios {
         } else {
             config = url
         }
+        config = mergeConfig(this.defaults, config)
+        config.method = config.method.toLowerCase()
         const chain: PromiseChain[] = [{
             resolved: dispatchRequest,
             rejected: undefined
