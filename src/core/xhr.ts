@@ -3,11 +3,11 @@ import { parseHeaders } from '../helpers/headers';
 import { createError } from '../helpers/error';
 export default function xhr(config: AxiosRequestConfig): AxiosPromise {
     return new Promise((resolve, reject) => {
-        const { data = null, url, method = 'get', headers, responseType, timeout } = config
+        const { data = null, url, method = 'get', headers, responseType, timeout, cancelToken } = config
         // 新建 xhr 实例
         const request = new XMLHttpRequest()
         // 建立连接
-        request.open(method.toUpperCase(), url, true)
+        request.open(method.toUpperCase(), url!, true)
 
         if (responseType) {
             request.responseType = responseType
@@ -15,7 +15,12 @@ export default function xhr(config: AxiosRequestConfig): AxiosPromise {
         if (timeout) {
             request.timeout = timeout
         }
-
+        if (cancelToken) {
+            cancelToken.promise.then(reason => {
+                request.abort()
+                reject(reason)
+            })
+        }
         // 处理 state 状态变化
         request.onreadystatechange = function handleLoad() {
             if (request.readyState !== 4) {
