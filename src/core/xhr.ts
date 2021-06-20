@@ -3,7 +3,15 @@ import { parseHeaders } from '../helpers/headers';
 import { createError } from '../helpers/error';
 export default function xhr(config: AxiosRequestConfig): AxiosPromise {
     return new Promise((resolve, reject) => {
-        const { data = null, url, method = 'get', headers, responseType, timeout, cancelToken } = config
+        const {
+            data = null,
+            url,
+            method = 'get',
+            withCredentials,
+            headers,
+            responseType,
+            timeout,
+            cancelToken } = config
         // 新建 xhr 实例
         const request = new XMLHttpRequest()
         // 建立连接
@@ -11,6 +19,9 @@ export default function xhr(config: AxiosRequestConfig): AxiosPromise {
 
         if (responseType) {
             request.responseType = responseType
+        }
+        if (withCredentials) {
+            request.withCredentials = withCredentials
         }
         if (timeout) {
             request.timeout = timeout
