@@ -24,9 +24,14 @@ export interface AxiosRequestConfig {
     withCredentials?: boolean
     xsrfCookieName?: string
     xsrfHeaderName?: string
+    auth?: AxiosBasicCredentials
     onDownloadProgress?: (e: ProgressEvent) => void
     onUploadProgress?: (e: ProgressEvent) => void
     [propName: string]: any
+}
+export interface AxiosBasicCredentials {
+    username: string
+    password: string
 }
 export interface CancelToken {
     promise: Promise<string>

@@ -8,6 +8,7 @@ const webpackConfig = require('./webpack.config')
 const compiler = webpack(webpackConfig)
 const multipart = require('connect-multiparty')
 const path = require('path')
+const atob = require('atob')
 
 require('./server2')
 
